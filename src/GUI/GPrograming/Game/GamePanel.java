@@ -23,6 +23,7 @@ import java.awt.Polygon;
 public class GamePanel extends JPanel {
   Dungeon D = new Dungeon();
   Player player = new Player("src/GUI/Images/CharacterImages/TestSlime.png",100,100);
+  StatBars bars = new StatBars(0,500);
   Polygon floor;
   //never sets the size of itself(the pannel) within the class
   //note just incase there are visual bugs
@@ -32,6 +33,7 @@ public class GamePanel extends JPanel {
     Room r = D.getMainRoom();
     floor = new Polygon( new int[]{192,0,r.getWidth(),r.getWidth()-192},new int[] {145,r.getHeight(),r.getHeight(),145},4);
   }
+    
   
   public void setUpDungeon(){
     D.populateRooms(0);
@@ -66,7 +68,6 @@ DebugWriter.write(""+D.getMainRoom().toString());
       }
     }
   }
-  
   public void paintComponent(Graphics g){
     try{
     Thread.sleep(85); 
@@ -81,7 +82,7 @@ DebugWriter.write(""+D.getMainRoom().toString());
     D.draw(g);
     player.draw(g);
     representDungeon(D.getMainRoom(),g,200,200);
-
+    bars.draw(g);
     //g.fillPolygon(floor);
     repaint();
   }

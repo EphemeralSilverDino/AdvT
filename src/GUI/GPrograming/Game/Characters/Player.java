@@ -12,7 +12,6 @@ public class Player extends Character{
   
   public void updateStats(){
     multiMove();
-    System.out.println(directions);
   }
   
   public void accelerate(){
@@ -28,13 +27,13 @@ public class Player extends Character{
     if (c=='w'){
       y-=stats.get("speed");
     }
-    if (c=='a'){
+    else if (c=='a'){
       x-=stats.get("speed");
     }
-    if (c=='d'){
+    else if (c=='d'){
       x+=stats.get("speed");
     }
-    if (c=='s'){
+    else if (c=='s'){
       y+=stats.get("speed");
     }
   }

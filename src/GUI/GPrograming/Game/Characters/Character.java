@@ -6,23 +6,14 @@ import java.io.File;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
 
-public class Character{
-	int x;
-	int y;
-	BufferedImage sprite;
+public class Character extends RenderedEntity{
   HashMap<String,Integer> stats = new HashMap<>();
   boolean visible = true;
   boolean moving = false;
   boolean running = false;
   
   public Character (String url, int x, int y){
-		this.x=x;
-    this.y=y;
-    try{
-      sprite = ImageIO.read(new File(url));
-    }
-    catch(Exception e){
-    }
+		super(url,x,y);
     setDefaultStats();
 	}
   
@@ -37,10 +28,7 @@ public class Character{
     stats.put("speedMin",2);
     stats.put("mana",100);
     stats.put("manaMax",100);
-    
   }
-  
-  
   
   public void tick(){
     updateStats();
@@ -57,7 +45,7 @@ public class Character{
     updateStats();
     tick();
     if (visible)
-		   g.drawImage(sprite,x,y,null);
+		   g.drawImage(image,x,y,null);
 	}
   
 	public void changeVisibility(){
@@ -67,19 +55,7 @@ public class Character{
   public void setVisibility(boolean b){
     visible = b;
   }
-  
-  public int getX(){
-    return x;
-  }
-  public int getY(){
-    return y;
-  }
-  public int getWidth(){
-    return sprite.getWidth();
-  }
-  public int getHeight(){
-    return sprite.getHeight();
-  }
+
   public void teleport(int x, int y){
     this.x = x;
     this.y = y;

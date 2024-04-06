@@ -25,7 +25,6 @@ public class Room{
     this(url,x1,y1);
     parentRoom = r;
   }
-
   public Room(String url, int x, int y){
     this.x = x;
     this.y = y;
