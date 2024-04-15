@@ -9,7 +9,6 @@
  All user interactions should be abstracted and forwarded to TicTacToe classes.
 */
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.*;
@@ -22,12 +21,16 @@ import java.util.*;
 import java.awt.Polygon;
 public class GamePanel extends JPanel {
   Dungeon D = new Dungeon();
-  Animations ani = new Animations("src/GUI/Images/CharacterImages/MidSlimeIdle.png",6,6);
-  Player player = new Player(ani,100,100);
+  static Animations ani = new Animations("src/GUI/Images/CharacterImages/MidSlimeIdle.png",6,6);
+  private static Player player = new Player(ani,100,100);
   StatBars bars = new StatBars(0,500);
   Polygon floor;
   //never sets the size of itself(the pannel) within the class
   //note just incase there are visual bugs
+  public static Player getPlayer(){
+    return player;
+  }
+  
   public GamePanel(){
     createEventHandlers();
     setUpDungeon();
