@@ -7,32 +7,41 @@ import javax.imageio.ImageIO;
 
 public class StatBars{
   
-  BufferedImage hpBar = null;
+  RenderedEntity hpBar = null;
+  RenderedEntity hpGauge = null;
   int hpPercent = 100;
   int ManaPercent = 100;
-  BufferedImage manaBar = null;
+  RenderedEntity manaBar = null;
+  RenderedEntity manaGauge = null;
+
   int x = 0;
   int y = 0;
   
   public StatBars(int x, int y){
     this.x=x;
     this.y=y;
-    try{
-      hpBar= ImageIO.read(new File("src/GUI/Images/HealthBar.png"));
-    manaBar= ImageIO.read(new File("src/GUI/Images/ManaBar.png"));
-    }  
-    catch(Exception e){
-    }   
+    hpBar = new RenderedEntity("src/GUI/Images/HealthBar.png",x,y);
+    manaBar = new RenderedEntity("src/GUI/Images/ManaBar.png",x,y+60);
+    manaGauge = new RenderedEntity("src/GUI/Images/ManaGuage.png",x,y+60);
+    hpGauge = new RenderedEntity("src/GUI/Images/HealthGuage.png",x,y);
+    manaBar.resize(180,45);
+    hpBar.resize(180,45);
+    manaGauge.resize(90,45);
+    hpGauge.resize(120,45);
   }
+  
   public void updateHP(int hp, int hpMax){
     hpPercent = hp*100/hpMax;
   }
+  
   public void updateMana(int mana, int manaMax){
       ManaPercent = mana*100/manaMax;
   }
   public void draw(Graphics g){
     //g.setColor(Color.black);
-    g.drawImage(hpBar,x,y,null); //50
-    g.drawImage(manaBar,x,y+60,null);
+    hpGauge.draw(g);
+    hpBar.draw(g);
+    manaGauge.draw(g);
+    manaBar.draw(g);
   }
 }

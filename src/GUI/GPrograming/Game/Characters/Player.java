@@ -10,7 +10,15 @@ public class Player extends Character{
     lastPos = new Point(x,y);
   }
   
-  public void updateStats(){
+  public Player (Animations annie, int x, int y){
+    super(annie,x,y);
+    System.out.println("Animated Player character created");
+    lastPos = new Point(x,y);
+
+  }
+  
+  public void update(){
+    super.update();
     multiMove();
   }
   
@@ -49,8 +57,7 @@ public class Player extends Character{
     else if ((c+"").equals("r")){
       running = !running;
       accelerate();
-    }
-    
+    } 
   }
   public void addDirection(char c){
     if (directions.indexOf(c+"")==-1 && "wasd".contains(""+c)){

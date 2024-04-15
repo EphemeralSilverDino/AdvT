@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 
 public class Character extends RenderedEntity{
   HashMap<String,Integer> stats = new HashMap<>();
+  ArrayList<StatEffect> effects = new ArrayList<>();
+  ArrayList<Atk> attacks = new ArrayList<>();
   boolean visible = true;
   boolean moving = false;
   boolean running = false;
@@ -16,6 +18,11 @@ public class Character extends RenderedEntity{
 		super(url,x,y);
     setDefaultStats();
 	}
+  
+  public Character(Animations annie, int x, int y){
+    super(annie,x,y);
+    setDefaultStats();
+  }
   
   public void setDefaultStats(){
     stats.put("maxHp",100);
@@ -30,20 +37,37 @@ public class Character extends RenderedEntity{
     stats.put("manaMax",100);
   }
   
-  public void tick(){
-    updateStats();
+  public int getStat(String key){
+    return stats.get(key);
+  }
+  public void setStat(String key, int val){
+    stats.put(key,val);
+    normalizeStat(key);
+  }
+  public void normalizeStat(String key){
+    if (stats.get(key)<0)
+      stats.put(key,0);
+  }
+  
+  public void changeStat(String key, int val){
+    stats.put(key,stats.get(key)+val);
+    normalizeStat(key);
+  }
+  
+  public void update(){
+    super.update();
+    for (StatEffect e : effects){
+      StatEffectHandler.handleEffect(e,this);
+    }
   }
   
   public void setRunning(boolean b){
     running = b;
   }
   
-  public void updateStats(){
-  }
   
 	public void draw(Graphics g){
-    updateStats();
-    tick();
+    update();
     if (visible)
 		   g.drawImage(image,x,y,null);
 	}

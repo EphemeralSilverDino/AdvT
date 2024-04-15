@@ -18,7 +18,7 @@ public class Dungeon{
   // 0 up 1 right 2 down 3 left
   Door[] doors = new Door[] {new Door("src/GUI/Images/DungeonDoor.png",400,0,"up"),new Door("src/GUI/Images/DoorLeft.png",810,350,"left"),new Door("src/GUI/Images/DungeonDoor.png",400,600,"down"),new Door("src/GUI/Images/DoorLeft.png",0,400,"right")};
   public Dungeon(){
-    this(new Room("src/GUI/Images/Room.png",0,0),7);
+    this(new Room("src/GUI/Images/RoomSpriteSheet.png",0,0,1,18),7);
   }
   
   public Room getMainRoom(){
@@ -175,5 +175,10 @@ public class Dungeon{
 	// Randomize Dice Roll
   public int rollDie(int sides){
     return (int) (Math.random()*sides);
+  }
+  public void update(){
+    int x = (int) currentRoom.getX();
+    int y = (int) currentRoom.getY();
+    map[x][y].update();
   }
 }
