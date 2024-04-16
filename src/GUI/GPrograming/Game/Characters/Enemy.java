@@ -25,7 +25,6 @@ public class Enemy extends Character{
   }
   
 	public void followPlayer(Player p){
-    
 		// if player is in sight range then move towards  the player until player is in attack range
 		Point l = new Point (p.getX(),p.getY());
 		// distance from this to p player
@@ -35,7 +34,7 @@ public class Enemy extends Character{
         x+=getStat("speed");
       else if(getX()>l.getX())
         x-=getStat("speed");
-      else if(getY()<l.getY())
+      if(getY()<l.getY())
         y+=getStat("speed");
       else if(getY()>l.getY())
         y-=getStat("speed");
